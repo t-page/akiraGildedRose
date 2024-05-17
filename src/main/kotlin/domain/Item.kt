@@ -1,4 +1,4 @@
-package org.example.domain.model
+package org.example.domain
 
 data class Item (
     val sellIn: Int,

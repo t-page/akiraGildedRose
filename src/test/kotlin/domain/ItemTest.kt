@@ -1,4 +1,6 @@
-import org.example.domain.model.Item
+package domain
+
+import org.example.domain.Item
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
