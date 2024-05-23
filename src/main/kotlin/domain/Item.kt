@@ -1,12 +1,33 @@
 package org.example.domain
 
 data class Item (
+    val name: String,
     val sellIn: Int,
     val quality: Int
 ) {
     fun updateQuality(): Item {
-        val newSellIn = sellIn - 1
-        val newQuality = quality - 1
-        return Item(newSellIn, newQuality)
+        var newSellIn = sellIn
+        var newQuality = quality
+        if (quality > 0) {
+            when(name) {
+                "Aged brie" -> {
+                    if (sellIn <= 0) {
+                        newQuality += 2
+                    } else {
+                        newSellIn -= 1
+                        newQuality += 1
+                    }
+                }
+                else -> {
+                    if (sellIn <= 0) {
+                        newQuality -= 2
+                    } else {
+                        newSellIn -= 1
+                        newQuality -= 1
+                    }
+                }
+            }
+        }
+        return Item(name, newSellIn, newQuality)
     }
 }

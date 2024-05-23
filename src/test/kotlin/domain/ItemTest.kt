@@ -7,12 +7,31 @@ import kotlin.test.assertEquals
 internal class ItemTest {
 
     @Test
-    fun `Item should update sellIn and quality`() {
-        val item = Item(7, 9)
+    fun `Random item should update sellIn and quality correctly`() {
+        val itemPositiveSellIn = Item("random", 7, 9)
+        val updatedItemPositiveSellIn = itemPositiveSellIn.updateQuality()
+        val expectedItemPositiveSellIn = itemPositiveSellIn.copy(sellIn = 6, quality = 8)
+
+        val itemZeroSellIn = Item("random", 0, 9)
+        val updatedItemZeroSellIn = itemZeroSellIn.updateQuality()
+        val expectedItemZeroSellIn = itemZeroSellIn.copy(quality = 7)
+
+        assertEquals(updatedItemPositiveSellIn, expectedItemPositiveSellIn)
+        assertEquals(updatedItemZeroSellIn, expectedItemZeroSellIn)
+    }
+
+    @Test
+    fun `Aged brie item should update sellIn and quality correctly`() {
+        val item = Item("Aged brie", 7, 10)
         val updatedItem = item.updateQuality()
-        val expectedItem = Item(6, 8)
-        //val expectedItem = item.copy(sellIn = 6, quality = 8)  -> de esta manera estaría comprobando que el valor de las propiedades del objeto item han cambiado correctamente, sin tener que crear una nueva instancia del objeto
+        val expectedItem = item.copy(sellIn = 6, quality = 11)
+
+        val itemZeroSellIn = Item("Aged brie", 0, 10)
+        val updatedItemZeroSellIn = itemZeroSellIn.updateQuality()
+        val expectedItemZeroSellIn = itemZeroSellIn.copy(quality = 12)
+
         assertEquals(updatedItem, expectedItem)
+        assertEquals(updatedItemZeroSellIn, expectedItemZeroSellIn)
     }
 }
 
