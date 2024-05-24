@@ -33,6 +33,20 @@ internal class ItemTest {
         assertEquals(updatedItem, expectedItem)
         assertEquals(updatedItemZeroSellIn, expectedItemZeroSellIn)
     }
+
+    @Test
+    fun `updateQuality function must return null if quality is less or equal to 0`() {
+        val itemZeroQuality = Item("random", 7, 0)
+        val updatedItem = itemZeroQuality.updateQuality()
+        val expectedItem = null
+
+        val itemNegativeQuality = Item("Aged brie", 0, -1)
+        val updatedItemZeroSellIn = itemNegativeQuality.updateQuality()
+        val expectedItemZeroSellIn = null
+
+        assertEquals(updatedItem, expectedItem)
+        assertEquals(updatedItemZeroSellIn, expectedItemZeroSellIn)
+    }
 }
 
 // Mutability
