@@ -35,14 +35,14 @@ internal class ItemTest {
     }
 
     @Test
-    fun `updateQuality function must return null if quality is less or equal to 0`() {
+    fun `item's quality is never under zero`() {
         val itemZeroQuality = Item("random", 7, 0)
         val updatedItem = itemZeroQuality.updateQuality()
-        val expectedItem = null
+        val expectedItem = itemZeroQuality.copy(sellIn = 6)
 
-        val itemNegativeQuality = Item("Aged brie", 0, -1)
-        val updatedItemZeroSellIn = itemNegativeQuality.updateQuality()
-        val expectedItemZeroSellIn = null
+        val itemZeroSellIn = Item("random", 0, 1)
+        val updatedItemZeroSellIn = itemZeroSellIn.updateQuality()
+        val expectedItemZeroSellIn = itemZeroSellIn.copy(sellIn = -1, quality = 0)
 
         assertEquals(updatedItem, expectedItem)
         assertEquals(updatedItemZeroSellIn, expectedItemZeroSellIn)

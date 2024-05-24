@@ -8,28 +8,27 @@ data class Item (
     fun updateQuality(): Item? {
         var newSellIn = sellIn
         var newQuality = quality
-        if (quality > 0) {
-            when(name) {
-                "Aged brie" -> {
-                    if (sellIn <= 0) {
-                        newQuality += 2
-                    } else {
-                        newSellIn -= 1
-                        newQuality += 1
-                    }
-                }
-                else -> {
-                    if (sellIn <= 0) {
-                        newQuality -= 2
-                    } else {
-                        newSellIn -= 1
-                        newQuality -= 1
-                    }
+        when(name) {
+            "Aged brie" -> {
+                if (sellIn <= 0) {
+                    newQuality += 2
+                } else {
+                    newSellIn -= 1
+                    newQuality += 1
                 }
             }
-            return Item(name, newSellIn, newQuality)
+            else -> {
+                if (sellIn <= 0 && quality >= 2) {
+                    newQuality -= 2
+                } else {
+                    newSellIn -= 1
+                    newQuality -= 1
+                }
+            }
         }
-        return null
+        newQuality = newQuality.coerceAtLeast(0) // ensures quality is never under 0
+
+        return Item(name, newSellIn, newQuality)
     }
 }
 
